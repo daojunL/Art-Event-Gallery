@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path
@@ -21,12 +22,15 @@ from dashboard import views as dashViews
 from music import views as musicViews
 from django.conf import settings
 
+
 urlpatterns = {
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashViews.home),
-    url(r'^music/$', musicViews.musicPage),
+    url(r'^music/$', musicViews.ShowEvents),
     url(r'^music/search/$', musicViews.QueryEvents),
-    url(r'^contact/$', dashViews.ContactPage.as_view()),
-    #url(r'contact/confirmation/$', dashViews.subscribe)
+    url(r'^contact/$', dashViews.get),
+    url(r'^contact/subscribe/$', dashViews.post),
+    url(r'^detail/$', musicViews.detail),
+    # path('event/<int:post_pk>', musicViews.detail)
 }
 

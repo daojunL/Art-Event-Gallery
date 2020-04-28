@@ -8,7 +8,6 @@ from email import encoders
 
 def autoreply(toaddr):
     """Send reply to contact submission."""
-
     fromaddr = "lynzbts09@gmail.com"
     msg = MIMEMultipart()
 
@@ -26,3 +25,4 @@ def autoreply(toaddr):
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
+

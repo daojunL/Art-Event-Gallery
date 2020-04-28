@@ -1,13 +1,12 @@
-{% load staticfiles %}
-<!doctype html>
+{% load static %}
 <html lang="en-US">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Light Theme</title>
-  <link href="{% static "css/singlePageTemplate.css"  %}" rel="stylesheet" type="text/css">
+  <title>Light Theme</title>
+  <link href="{% static 'css/singlePageTemplate.css'  %}" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet"
     href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -101,7 +100,7 @@
         </div>
       </div>
       <div class="container_h4_text">
-        <h4>Search More Concerts</h4>
+          <h4><a href = "/music/">Search More Concerts</a></h4>
       </div>
 
   </section>
@@ -200,7 +199,7 @@
   <section class="footer_banner" id="contact">
     <h2 class="hidden">Footer Banner Section </h2>
     <h1 class="h1_text">FOR THE LATEST NEWS &amp; UPDATES</h1>
-    <div class="button">subscribe</div>
+    <div class="button" onclick="window.open('/contact');">subscribe</div>
   </section>
   <!-- Copyrights Section -->
   <div class="copyright">&copy;2020- <strong>Art Theme</strong></div>

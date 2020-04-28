@@ -12,11 +12,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
-import pymysql
-
-pymysql.install_as_MySQLdb()
-
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,12 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'music',
     'theater',
     'exhibition',
     'payment',
-    'dashboard',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -61,19 +55,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-
-
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-    'VIEW',
-)
 
 ROOT_URLCONF = 'ArtEvents.urls'
 
@@ -94,7 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ArtEvents.wsgi.application'
-#APPEND_SLASH = False
+
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -103,13 +87,12 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'artEvents',
-        'USER': 'root',
-        'PASSWORD': 'Zl910930',
-        #'HOST': '192.168.1.10',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        'NAME': 'AEG',  # 数据库名，先前创建的
+        'USER': 'root',  # 用户名，可以自己创建用户
+        'PASSWORD': 'wpidb542',  # 密码
+        'HOST': 'database-1.cxdkf5o0iria.us-east-2.rds.amazonaws.com',  # mysql服务所在的主机ip
+        'PORT': '3306',  # mysql服务端口
     }
 }
 
@@ -140,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
