@@ -1,18 +1,21 @@
 import json
 from audioop import reverse
 from django.shortcuts import render
+from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from dashboard.models import *
 import datetime, pytz
 from django.http import HttpResponseRedirect
-#from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.http import JsonResponse
+
+
 # Create your views here.
 
 @csrf_exempt
 def musicPage(request):
     if request.GET:
-    # return 8 events:{'Eid':[title, e_image, address, date_YMD]}
+        # return 8 events:{'Eid':[title, e_image, address, date_YMD]}
         selectEvents = ArtEvents.objects.all()[:8]
         eid = [x.eid for x in selectEvents]
         title = [x.title for x in selectEvents]
@@ -28,13 +31,13 @@ def musicPage(request):
             date_YMD.append(date[0].get('date_ymd'))
 
         content = {
-             'Eid':eid,
-             'title':title,
-             'e_image': e_image,
-             'address':address,
-             'date':date_YMD,
-             'status': 'SUCCESS'
-         }
+            'Eid': eid,
+            'title': title,
+            'e_image': e_image,
+            'address': address,
+            'date': date_YMD,
+            'status': 'SUCCESS'
+        }
         content['date'].sort()
         return render(request, 'SearchConcertPage.html', context=content)
 
@@ -57,10 +60,10 @@ def QueryEvents(request):
         # find the search eventid
         Eid1, Eid2, Eid3 = set(), set(), set()
         if city != '':
-            lid = Location.objects.filter(address_contains=city).values('Lid')
+            lid = Location.objects.filter(address__contains=city).values('Lid')
             # if len(address_id) == 0:
             #     pass
-               # return render(request, 'SearchConcertPage.html', {'error_message':'Events not found'})
+            # return render(request, 'SearchConcertPage.html', {'error_message':'Events not found'})
             if len(lid) == 1:
                 curlid = lid[0].get('lid')
                 eid = Held.objects.filter(lid=curlid).values('eid')
@@ -77,10 +80,10 @@ def QueryEvents(request):
 
         if time != '':
             Timedata = Time.objects.values()
-            setDate = datetime.date(2020, 4, 20) # set a date
+            setDate = datetime.date(2020, 4, 20)  # set a date
 
             for i in range(len(Timedata)):
-                #date = datetime.datetime(Timedata[i].get('Tyear'),Timedata[i].get('Tmonth'),(Timedata[i].get('Tday')))
+                # date = datetime.datetime(Timedata[i].get('Tyear'),Timedata[i].get('Tmonth'),(Timedata[i].get('Tday')))
                 date = datetime.date.fromisoformat(Timedata[i].get('date_ymd'))
                 interval = date - setDate
                 if interval.days < timeDict[time]:
@@ -93,7 +96,7 @@ def QueryEvents(request):
                 Eid2.add(tmpEvents[i].get('eid'))
 
         if type != '':
-            eid = Concert.objects.filter(concert_type_contains=type).values('eid')
+            eid = Concert.objects.filter(concert_type__contains=type).values('eid')
             for i in range(len(eid)):
                 Eid3.add(eid[i].get('eid'))
         else:
@@ -107,27 +110,27 @@ def QueryEvents(request):
         ## query: Eid, title, e_image，address, date_YMD
         title, e_image, address, date_YMD = [], [], [], []
 
-        if len(finalEid) ==0:
+        if len(finalEid) == 0:
             content = {
                 'status': 'FAILED'
             }
-            #return render(request, 'SearchConcertPage.html', context=content)
+            # return render(request, 'SearchConcertPage.html', context=content)
             return JsonResponse(content)
-        elif len(finalEid) ==1:
+        elif len(finalEid) == 1:
             feid = finalEid[0]
-            t = ArtEvents.objects.filter(eid=feid).values('title','e_image') # title, e_image
+            t = ArtEvents.objects.filter(eid=feid).values('title', 'e_image')  # title, e_image
             title.append(t[0].get('title'))
             e_image.append(t[0].get('e_image'))
 
             lid = Held.objects.filter(eid=feid).values('lid')
             addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')
-            address.append(addr[0].get('address')) # address
+            address.append(addr[0].get('address'))  # address
 
             timeSerial = TOn.objects.filter(eid=feid).values('time_serial')
             date = Time.objects.filter(time_serial=timeSerial[0].get('time_serial')).values('date_ymd')
             date_YMD.append(date[0].get('date_ymd'))
         else:
-            for item in finalEid :
+            for item in finalEid:
                 t = ArtEvents.objects.filter(eid=item).values('title', 'e_image')  # title, e_image
                 title.append(t[0].get('title'))
                 e_image.append(t[0].get('e_image'))
@@ -150,11 +153,8 @@ def QueryEvents(request):
         }
         # sort by date desc
         content['date'].sort()
-        #return render(request, 'SearchConcertPage.html', context=content)
+        # return render(request, 'SearchConcertPage.html', context=content)
         return JsonResponse(content)
-    else:
-        return HttpResponseRedirect(reverse(musicPage))
-
 
 
 def sortbyDate(request):
@@ -196,6 +196,13 @@ def sortbyDate(request):
 # def sortbyDistance(request):
 #     if request.POST:
 
+# class QueryMusic(View):
+#     def get(self, request):
+#         # if get, return to default page
+#         return HttpResponseRedirect(reverse(musicPage))
+#
+#     def post(self, requst):
+#         if request.POST.get('confirm'):
 
 
 def music_details(request):
@@ -224,17 +231,4 @@ def music_details(request):
             'address': location,
             'time': time
         }
-        return render(request, 'music_details.html', context=content)
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return render(request, 'EventPage.html', context=content)

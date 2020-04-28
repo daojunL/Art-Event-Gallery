@@ -60,6 +60,7 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -69,6 +70,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -177,7 +179,8 @@
       <workItem from="1587404968706" duration="9226000" />
       <workItem from="1587442680223" duration="13434000" />
       <workItem from="1587520649927" duration="21214000" />
-      <workItem from="1587783167258" duration="5213000" />
+      <workItem from="1587783167258" duration="13183000" />
+      <workItem from="1588034221910" duration="4369000" />
     </task>
     <servers />
   </component>

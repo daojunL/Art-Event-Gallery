@@ -74,7 +74,9 @@ ul li:hover a {
 	font-weight: bold;
     color: #717070;
 }
-.container {
+
+
+.container2{
     width: 90%;
     margin-top: 0px;
 	margin-left: auto;
@@ -82,7 +84,6 @@ ul li:hover a {
 	height: 800px;
 	background-color: white;
 }
-
 
 
 .search_header {
@@ -280,7 +281,8 @@ h3 {
 .right_content{
     margin-left: 50px;
     margin-right: 50px;
-    margin-top: 100px;
+    margin-top: 60px;
+    margin-bottom: 100px;
     text-align: left;
 }
 
@@ -304,5 +306,9 @@ h3 {
 
 .p {
     color: #6F7287;
+    margin-top: 20px;
+}
+
+.buttomlogo {
     margin-top: 20px;
 }

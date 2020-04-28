@@ -22,7 +22,7 @@ def autoreply(toaddr):
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(fromaddr, "PASSWORD FOR FROMADDR")
+    server.login(fromaddr, "Zllovebts09")
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()

@@ -24,8 +24,9 @@ from django.conf import settings
 urlpatterns = {
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashViews.home),
-    #url(r'^music/$', musicViews.ShowEvents),
-    url(r'^music/details/$', musicViews.music_details),
-
+    url(r'^music/$', musicViews.musicPage),
+    url(r'^music/search/$', musicViews.QueryEvents),
+    url(r'^contact/$', dashViews.ContactPage.as_view()),
+    #url(r'contact/confirmation/$', dashViews.subscribe)
 }
 
