@@ -1,0 +1,13 @@
+Tid,Eid,price,amount,refund_policy
+Tm001,exb0001,1,100,yes
+Tm002,exb0002,2,200,yes
+Tm003,exb0003,3,300,yes
+Tm004,exb0004,4,400,no
+Tm005,exb0005,1,100,yes
+Tm006,exb0006,2,100,yes
+Tm007,exb0007,3,100,yes
+Tm008,exb0008,4,300,no
+Tm009,exb0009,1,190,yes
+Tm010,exb0010,2,200,yes
+Tm011,exb0011,3,800,yes
+Tm012,exb0012,4,800,no
