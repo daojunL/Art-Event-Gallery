@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="AEG" uuid="f57b5494-4fbd-49d9-9376-e1f5fb316041">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://database-1.cxdkf5o0iria.us-east-2.rds.amazonaws.com:3306</jdbc-url>
+    </data-source>
+  </component>
+</project>
