@@ -1,13 +1,15 @@
 {% load static %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Access-Control-Allow-Origin" content="IE=edge">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static 'css/searchPageTemplate.css' %}" rel="stylesheet" type="text/css">
+    <link href="css/searchPageTemplate.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -31,24 +33,28 @@
         crossorigin="anonymous"></script>
     <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
     <![endif]-->
+
 </head>
 
 <body>
     <div class="container">
         <header>
             <a href="">
-                <h4 class="logo">Music</h4>
+                <h4 class="logo">Exhibition</h4>
             </a>
             <nav>
                 <ul>
-                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="../HomePage.html">HOME</a></li>
+                    <li> <a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
         </header>
 
-        <img src="{% static 'images/rock.jpg' %}" class="img-fluid" alt="Responsive image">
+        <img src="images/exhibition.png" class="img-fluid" alt="Responsive image">
+
         <!-- select button section -->
         <div class="button_container_container">
+
             <div class="btn-group">
                 <div class="text-button-container">
                     Choose A City
@@ -58,13 +64,13 @@
                     </button>
                     <div>
                         <ul class="dropdown-menu" id="ddmCity">
-                            <li><a class="dropdown-item" href="#" data-value="New York">New York</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Worcester">Worcester</a></li>
                             <li><a class="dropdown-item" href="#" data-value="Boston">Boston</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Los Angeles">Los Angeles</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Mashantucket">Mashantucket</a></li>
                         </ul>
                     </div>
-                </div>
 
+                </div>
                 <div class="text-button-container">
                     Choose A Time
                     <button type="button" id="btnTime" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
@@ -74,24 +80,10 @@
                     <div>
                         <ul class="dropdown-menu" id="ddmTime">
                             <li><a class="dropdown-item" href="#" data-value="1">In a week</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="2">In a month</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="2">In a months</a></li>
                             <li><a class="dropdown-item" href="#" data-value="3">In three months</a></li>
                             <li><a class="dropdown-item" href="#" data-value="4">In half a year</a></li>
                             <li><a class="dropdown-item" href="#" data-value="5">In a year</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="text-button-container">
-                    Choose A Type
-                    <button type="button" id="btnType" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        default
-                    </button>
-                    <div>
-                        <ul class="dropdown-menu" id="ddmType">
-                            <li><a class="dropdown-item" href="#" data-value="Rock">Rock</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="R&B">R&B</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Country">Country</a></li>
                         </ul>
                     </div>
                 </div>
@@ -105,14 +97,14 @@
         <div class="sort_container">
             <div class="btn-group">
                 <div>
-                    <button type="button" id = "btnSort" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
+                    <button type="button" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         sort by date
                     </button>
                     <div>
-                        <ul class="dropdown-menu" id = "sortType">
-                            <li><a class="dropdown-item" href="#" data-value = "1">sort by date</a></li>
-                            <li><a class="dropdown-item" href="#" data-value = "2">sort by distance</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">sort by date</a></li>
+                            <li><a class="dropdown-item" href="#">sort by distance</a></li>
                         </ul>
                     </div>
                 </div>
@@ -123,31 +115,31 @@
         <div class="container_card">
             <div class="card-deck">
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.0 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.0 }}"> {{ content.title.0 }} </a></h5>
-                        <p class="card-text">{{ content.date.0 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.1 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.1 }}">{{ content.title.1 }}</a></h5>
-                        <p class="card-text">{{ content.date.1 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.2 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.2 }}">{{ content.title.2 }}</a></h5>
-                        <p class="card-text">{{ content.date.2 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.3 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.3 }}">{{ content.title.3 }}</a></h5>
-                        <p class="card-text">{{ content.date.3 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
             </div>
@@ -156,36 +148,45 @@
         <div class="container_card">
             <div class="card-deck">
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.4 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.4 }}">{{ content.title.4 }}</a></h5>
-                        <p class="card-text">{{ content.date.4 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.5 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.5 }}">{{ content.title.5 }}</a></h5>
-                        <p class="card-text">{{ content.date.5 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.6 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.6 }}">{{ content.title.6 }}</a></h5>
-                        <p class="card-text">{{ content.date.6 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
                 <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.7 }}" alt="Card image cap">
+                    <img class="card-img-top" src="images/pic.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.7 }}">{{ content.title.7 }}</a></h5>
-                        <p class="card-text">{{ content.date.7 }}</p>
+                        <h5 class="card-title">React Summit 2020 New Year Conference</h5>
+                        <p class="card-text">2020/02/03,Boston</p>
                     </div>
                 </div>
             </div>
         </div>
 
+
+
+        <!-- Footer Section -->
+        <section class="footer_banner" id="contact">
+            <h2 class="hidden">Footer Banner Section </h2>
+            <h1 class="h1_text">FOR THE LATEST NEWS &amp; UPDATES</h1>
+            <div class="button">subscribe</div>
+        </section>
+        <!-- Copyrights Section -->
         <div class="copyright">&copy;2020- <strong>Art Theme</strong></div>
     </div>
 
@@ -200,38 +201,24 @@
             $(this).parents(".text-button-container").find('.btn').html($(this).text());
             $(this).parents(".text-button-container").find('.btn').val($(this).data('value'));
         });
-        $("#ddmType li a").click(function () {
-            $(this).parents(".text-button-container").find('.btn').html($(this).text());
-            $(this).parents(".text-button-container").find('.btn').val($(this).data('value'));
-        });
-        $("#sortType li a").click(function () {
-            $(this).parents(".sort_container").find('.btn').html($(this).text());
-            $(this).parents(".sort_container").find('.btn').val($(this).data('value'));
-        });
         $("#btnSubmit").click(function () {
             var arr = { City: $("#btnCity").val(),
                         Time: $("#btnTime").val(),
-                        Type: $("#btnType").val(),
-                        Sort: $("#btnSort").val(),
-                        Tag: "Concert"};
+                        Tag: "Exhibition"};
 
             console.log("arr:" + JSON.stringify(arr));
             $.ajax({
-                url: "http://127.0.0.1:8000/music/search/",
+                // url: '{请求路径}',
                 type: 'POST',
                 data: JSON.stringify(arr),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 async: true,
-                success: function (content) {
-                    for (let i = 0; i < $(".card-title").length; i++){
-                        $(".card-title")[i].innerHTML = content.title[i];
-                        $(".card-text")[i].innerHTML = content.date[i];
-                        $(".card-img-top")[i].src=content.e_image[i];
-                    }
+                success: function (msg) {
+                    alert(msg);
                 }
             });
-        });
+        })
     </script>
 </body>
 

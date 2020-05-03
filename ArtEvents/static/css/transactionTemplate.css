@@ -19,6 +19,7 @@ header {
 .logo {
 	color: rgb(137, 163, 249);
 	font-weight: bold;
+	text-align: undefined;
 	width: 10%;
 	float: left;
 	margin-top: 15px;
@@ -73,7 +74,9 @@ ul li:hover a {
 	font-weight: bold;
     color: #717070;
 }
-.container {
+
+
+.container2{
     width: 90%;
     margin-top: 0px;
 	margin-left: auto;
@@ -81,7 +84,6 @@ ul li:hover a {
 	height: 800px;
 	background-color: white;
 }
-
 
 
 .search_header {
@@ -115,6 +117,7 @@ ul li:hover a {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:rgb(252, 130, 81);
     text-align: center;
+	vertical-align: left;
 	border-radius: 0px;
 	text-transform: none;
 	font-weight: bold;
@@ -201,6 +204,7 @@ footer .footer_column p {
 	padding-top: 30px;
 	padding-bottom: 30PX;
 	margin-bottom: 0px;
+	background-image: url(../images/pattern.png);
 	background-repeat: repeat;
 }
 footer {
@@ -277,7 +281,8 @@ h3 {
 .right_content{
     margin-left: 50px;
     margin-right: 50px;
-    margin-top: 100px;
+    margin-top: 60px;
+    margin-bottom: 100px;
     text-align: left;
 }
 
@@ -293,10 +298,17 @@ h3 {
     text-align: center;
     border-color: #6F7287;
     border-style: solid;
-    background-color: rgb(250, 245, 225);
+    border-left: auto;
+    border-right: auto;
+	background-color: #D9D9D9;
+	width: 25%;
 }
 
 .p {
     color: #6F7287;
+    margin-top: 20px;
+}
+
+.buttomlogo {
     margin-top: 20px;
 }

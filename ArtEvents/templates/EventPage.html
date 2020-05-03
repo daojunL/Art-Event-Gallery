@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static 'css/eventPageTemplate.css'%}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/eventPageTemplate.css'  %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -35,25 +35,26 @@
 </head>
 
 <body>
-    <div class="container ">
+    <div class="container">
         <header>
             <a href="">
                 <h4 class="logo">Art</h4>
             </a>
             <nav>
                 <ul>
+                    <li><a href="../HomePage.html">HOME</a></li>
                     <li> <a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
         </header>
-
-        <img src="{% static 'images/event.jpg'%}" class="img-fluid" alt="Responsive image">
-
+    
+        <img src="{% static 'images/event.jpg' %}" class="img-fluid" alt="Responsive image">
+        
 
         <div class = "container">
-            <div class="row title_container" style="background:url('images/background.jpeg'); background-size: cover;">
+            <div class="row title_container" style="background:url({% static 'images/background.jpeg' %}); background-size: cover;">
                 <div class = "title_text_container">
-                    <h1>The 2020 World Tour of Justin Bieber</h1>
+                    <h1>{{ content.title }}</h1>
                 </div>
             </div>
             <div class="row">
@@ -66,20 +67,20 @@
                 <div class="col-4">
                     <div class = "right_content">
                         <h2> Performers </h2>
-                        <h4 class = "p"> Justin Bieber</h4>
+                        <h4 class = "p"> {{ content.name }}</h4>
                     </div>
                     <div class = "right_content">
                         <h2> Time </h2>
-                        <h4 class = "p"> 2020.04.06</h4>
+                        <h4 class = "p"> {{ content.date }}</h4>
                     </div>
                     <div class = "right_content">
                         <h2> Location </h2>
-                        <h4 class = "p"> Worcester, Park_Ave, Lin_Hall, 01608</h4>
+                        <h4 class = "p"> {{ content.address }}</h4>
                     </div>
                 </div>
             </div>
             <div class = "button_container">
-                <button type="button" class="btn btn-lg btn-info button_border">Purchase Ticket</button>
+                <button type="button" class="btn btn-lg btn-info button_border" onclick= window.open("../detail/payment?eid={{ content.eid }}");>Purchase Ticket</button>
             </div>
         </div>
 
@@ -92,8 +93,6 @@
         <!-- Copyrights Section -->
         <div class="copyright">&copy;2020- <strong>Art Theme</strong></div>
     </div>
-
-
     <script src="" async defer></script>
 </body>
 

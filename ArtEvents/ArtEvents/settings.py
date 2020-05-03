@@ -99,26 +99,42 @@ WSGI_APPLICATION = 'ArtEvents.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.db.backends.sqlite3',
+#         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'artEvents',
+#         'USER': 'root',
+#         'PASSWORD': 'Zl910930',
+#         #'HOST': '192.168.1.10',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
+# AWS RDS
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'artEvents',
-        'USER': 'root',
-        'PASSWORD': 'Zl910930',
-        #'HOST': '192.168.1.10',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        'NAME': 'AEG',  # 数据库名，先前创建的
+        'USER': 'root',  # 用户名，可以自己创建用户
+        'PASSWORD': 'wpidb542',  # 密码
+        'HOST': 'database-1.cxdkf5o0iria.us-east-2.rds.amazonaws.com',  # mysql服务所在的主机ip
+        'PORT': '3306',  # mysql服务端口
     }
 }
 
-# email
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'lynzbts09@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Zllovebts09'
-# EMAIL_PORT = '587'
-# EMAIL_USE_TLS = True
+#email
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'lynzbts09@gmail.com'
+EMAIL_HOST_PASSWORD = 'Zllovebts09'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Art Events <artevents@gmail.com>'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
