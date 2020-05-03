@@ -9,7 +9,7 @@ from django.db import models
 
 
 class ArtEvents(models.Model):
-    eid = models.CharField(db_column='Eid', primary_key=True, max_length=60)  # Field name made lowercase.
+    eid = models.CharField(db_column='Eid', primary_key=True, max_length=60,db_index=True)  # Field name made lowercase.
     title = models.CharField(max_length=60, blank=True, null=True)
     e_image = models.CharField(max_length=200, blank=True, null=True)
     seatmap = models.CharField(max_length=200, blank=True, null=True)
@@ -20,8 +20,8 @@ class ArtEvents(models.Model):
 
 
 class Artist(models.Model):
-    aid = models.CharField(db_column='Aid', primary_key=True, max_length=20)  # Field name made lowercase.
-    artist_name = models.CharField(max_length=20, blank=True, null=True)
+    aid = models.CharField(db_column='Aid', primary_key=True, max_length=20,db_index=True)  # Field name made lowercase.
+    artist_name = models.CharField(max_length=40, blank=True, null=True)
     info = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -40,7 +40,7 @@ class Concert(models.Model):
 
 class Exhibition(models.Model):
     eid = models.ForeignKey(ArtEvents, models.DO_NOTHING, db_column='Eid', primary_key=True)  # Field name made lowercase.
-    background = models.CharField(max_length=20, blank=True, null=True)
+    background = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -59,6 +59,19 @@ class Location(models.Model):
         db_table = 'Location'
 
 
+class Payment(models.Model):
+    pid = models.CharField(db_column='Pid', primary_key=True, max_length=20)  # Field name made lowercase.
+    address = models.CharField(max_length=200, blank=True, null=True)
+    fname = models.CharField(max_length=50, blank=True, null=True)
+    lname = models.CharField(max_length=50, blank=True, null=True)
+    ticket_num = models.CharField(max_length=20, blank=True, null=True)
+    total_price = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Payment'
+
+
 class Perform(models.Model):
     eid = models.ForeignKey(ArtEvents, models.DO_NOTHING, db_column='Eid', primary_key=True)  # Field name made lowercase.
     aid = models.ForeignKey(Artist, models.DO_NOTHING, db_column='Aid')  # Field name made lowercase.
@@ -67,6 +80,16 @@ class Perform(models.Model):
         managed = False
         db_table = 'Perform'
         unique_together = (('eid', 'aid'),)
+
+
+class Subscription(models.Model):
+    sid = models.CharField(db_column='Sid', primary_key=True, max_length=100)  # Field name made lowercase.
+    email = models.CharField(max_length=100, blank=True, null=True)
+    s_name = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Subscription'
 
 
 class TOn(models.Model):
@@ -111,7 +134,7 @@ class Time(models.Model):
 
 
 class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
+    name = models.CharField(unique=True, max_length=150)
 
     class Meta:
         managed = False
@@ -174,6 +197,17 @@ class AuthUserUserPermissions(models.Model):
         managed = False
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
+
+
+# class Buy(models.Model):
+#     pid = models.ForeignKey(Payment, models.DO_NOTHING, db_column='Pid', primary_key=True)  # Field name made lowercase.
+#     tid = models.ForeignKey(TicketHas, models.DO_NOTHING, db_column='Tid')  # Field name made lowercase.
+#     eid = models.ForeignKey(TicketHas, models.DO_NOTHING, db_column='Eid')  # Field name made lowercase.
+#
+#     class Meta:
+#         managed = False
+#         db_table = 'buy'
+#         unique_together = (('pid', 'tid', 'eid'),)
 
 
 class DashboardArtist(models.Model):

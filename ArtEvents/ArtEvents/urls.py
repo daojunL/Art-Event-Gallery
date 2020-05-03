@@ -19,14 +19,24 @@ from django.urls import path
 from django.conf.urls.static import static
 from dashboard import views as dashViews
 from music import views as musicViews
+from theater import views as theaterViews
+from exhibition import views as exViews
 from django.conf import settings
 
 urlpatterns = {
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashViews.home),
-    url(r'^music/$', musicViews.musicPage),
-    url(r'^music/search/$', musicViews.QueryEvents),
-    url(r'^contact/$', dashViews.ContactPage.as_view()),
-    #url(r'contact/confirmation/$', dashViews.subscribe)
+    url(r'^music/$', musicViews.MusicPage),
+    url(r'^music/search/$', musicViews.MusicQuery),
+    url(r'^theater/$', theaterViews.TheaterPage),
+    url(r'^theater/search/$', theaterViews.TheaterQuery),
+    url(r'^exhibition/$', exViews.ExhibitionPage),
+    url(r'^exhibition/search/$', exViews.ExhibtionQuery),
+    url(r'^contact/$', dashViews.ContactPage),
+    url(r'^contact/subscribe/$', dashViews.subscribe),
+    #path(r'detail/', musicViews.MusicDetail),
+    path(r'detail/payment/', musicViews.payment),  # 可以写在payment app下
+    path(r'paybill/', musicViews.write_pay_info)
 }
+
 

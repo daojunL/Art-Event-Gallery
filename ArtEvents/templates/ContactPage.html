@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% csrf_token %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <!--  styles -->
-
     <link href="{% static 'css/subscribe.css'%}" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
     <link href="{% static 'css/subscribeStyle.css'%}" rel="stylesheet">
@@ -25,12 +23,10 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">Art Gallery Events</a>
+          <a class="brand" href="../">Art Gallery Events</a>
         </div>
       </div>
     </div>
-
-
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="page-header">
@@ -73,13 +69,13 @@
 <script>
   $("#submit").click(function () {
     var arr = {
-      Name: $("#name").val(),
-      Email: $("#email").val(),
+      name: $("#name").val(),
+      email: $("#email").val(),
     };
 
     console.log("arr:" + JSON.stringify(arr));
     $.ajax({
-      url: 'http://127.0.0.1:8000/contact/',
+      url: 'http://127.0.0.1:8000/contact/subscribe/',
       type: 'POST',
       data: JSON.stringify(arr),
       contentType: 'application/json; charset=utf-8',

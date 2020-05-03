@@ -12,14 +12,13 @@ body {
 /* Navigation */
 header {
 	width: 100%;
-	height: 3.3%;
+	height: 5.2%;
 	background-color: #c5cbcb;
 	border-bottom: 1px solid rgb(166, 170, 179);
 }
 .logo {
 	color: rgb(126, 154, 244);
 	font-weight: bold;
-	text-align: undefined;
 	width: 10%;
 	float: left;
 	margin-top: 15px;
@@ -74,13 +73,13 @@ ul li:hover a {
 	font-weight: bold;
     color: #717070;
 }
-.container {
 
+.container {
     width: 90%;
     margin-top: 0px;
 	margin-left: auto;
 	margin-right: auto;
-	height: 1500px;
+	height: 900px;
 	background-color: white;
 }
 
@@ -105,7 +104,7 @@ ul li:hover a {
 	font-weight: bold;
 	letter-spacing: 2px;
 	color: rgba(228, 229, 248, 0.584);
-    transition: all 0.s linear;
+    transition: all 0.0s linear;
 }
 
 
@@ -117,7 +116,6 @@ ul li:hover a {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:rgb(252, 130, 81);
     text-align: center;
-	vertical-align: left;
 	border-radius: 0px;
 	text-transform: none;
 	font-weight: bold;
@@ -201,10 +199,9 @@ footer .footer_column p {
 }
 .footer_banner {
 	background-color: #B3B3B3;
-	padding-top: 30px;
+	padding-top: 0px;
 	padding-bottom: 30PX;
 	margin-bottom: 0px;
-	background-image: url(../images/pattern.png);
 	background-repeat: repeat;
 }
 footer {
@@ -236,7 +233,7 @@ h3 {
 }
 
 .container_card {
-	height: 400px;
+	height: 300px;
 }
 
 .h1_text {
@@ -259,4 +256,3 @@ h3 {
 	height: 60px;
 	text-align: right;
 }
-
