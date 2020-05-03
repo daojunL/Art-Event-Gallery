@@ -183,24 +183,6 @@ def QueryEvents(request):
     # if sort == "2":
     return JsonResponse(content)
 
-def detail(request):
-    eid = request.GET['eid']
-    title = ArtEvents.objects.filter(eid = eid).values('title')[0].get('title')
-    aid = Perform.objects.filter(eid = eid).values('aid')[0].get('aid')
-    name = Artist.objects.filter(aid = aid).values('artist_name')[0].get('artist_name')
-    seatmap = ArtEvents.objects.filter(eid=eid).values('seatmap')[0].get('seatmap')
-    lid = Held.objects.filter(eid=eid).values('lid')[0].get('lid')
-    address = Location.objects.filter(lid=lid).values('address')[0].get('address') # address这里还要对数据进行进一步的处理
-    timeSerial = TOn.objects.filter(eid=eid).values('time_serial')[0].get('time_serial')
-    date = Time.objects.filter(time_serial=timeSerial).values('date_ymd')[0].get('date_ymd')
-    content = {
-        'eid':eid,
-        'title': title,
-        'name':name,
-        'seatmap':seatmap,
-        'address':address,
-        'date':date
-    }
-    return render(request, 'EventPage.html', context = {'content': content})
+
 
 

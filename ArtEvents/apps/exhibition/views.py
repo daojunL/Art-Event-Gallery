@@ -185,16 +185,12 @@ def QueryEvents(request):
 
 def detail(request):
     eid = request.GET['eid']
-    print("exhibition")
-    print(eid)
     title = ArtEvents.objects.filter(eid = eid).values('title')[0].get('title')
-    print(title)
     background = Exhibition.objects.filter(eid=eid).values('background')[0].get('background')
-    print(background)
     lid = Held.objects.filter(eid=eid).values('lid')[0].get('lid')
-    print(lid)
-    address = Location.objects.filter(lid=lid).values('address')[0].get('address') # address这里还要对数据进行进一步的处理
-    print(address)
+    addr = Location.objects.filter(lid=lid).values('address')[0].get('address') # address这里还要对数据进行进一步的处理
+    addr_arr = addr.split("/")
+    address = addr_arr[0] + ", " + addr_arr[1] + ", " + addr_arr[2]
     timeSerial = TOn.objects.filter(eid=eid).values('time_serial')[0].get('time_serial')
     print(timeSerial)
     date = Time.objects.filter(time_serial=timeSerial).values('date_ymd')[0].get('date_ymd')
