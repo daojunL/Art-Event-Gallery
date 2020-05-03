@@ -8,9 +8,15 @@ import json
 from django.conf import settings
 from apps.dashboard.autoreply import autoreply
 from django.views.decorators.http import require_POST, require_GET
-from music import views as musicViews
+import re
+
 
 @require_GET
+def formatAddr(str):
+    newStr1 = str.replace("/",",")
+    newStr2 = re.sub(",time_zone:America,New_York", " ", newStr1).strip()
+    return newStr2
+
 def home(request):
     """the homepage view"""
     # 4 events per category
@@ -31,7 +37,7 @@ def home(request):
 
         lid = Held.objects.filter(eid=item).values('lid')
         addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')
-        address.append(musicViews.formatAddr(addr[0].get('address')))
+        address.append(formatAddr(addr[0].get('address')))
 
         timeSerial = TOn.objects.filter(eid=item).values('time_serial')
         date = Time.objects.filter(time_serial=timeSerial[0].get('time_serial')).values('date_ymd')
@@ -57,7 +63,7 @@ def detail(request):
     name = Artist.objects.filter(aid = aid).values('artist_name')[0].get('artist_name')
     seatmap = ArtEvents.objects.filter(eid=eid).values('seatmap')[0].get('seatmap')
     lid = Held.objects.filter(eid=eid).values('lid')[0].get('lid')
-    address = musicViews.formatAddr(Location.objects.filter(lid=lid).values('address')[0].get('address')) # address这里还要对数据进行进一步的处理
+    address = formatAddr(Location.objects.filter(lid=lid).values('address')[0].get('address')) # address这里还要对数据进行进一步的处理
     timeSerial = TOn.objects.filter(eid=eid).values('time_serial')[0].get('time_serial')
     date = Time.objects.filter(time_serial=timeSerial).values('date_ymd')[0].get('date_ymd')
     content = {
