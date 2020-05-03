@@ -66,6 +66,7 @@ class Payment(models.Model):
     lname = models.CharField(max_length=50, blank=True, null=True)
     ticket_num = models.CharField(max_length=20, blank=True, null=True)
     total_price = models.CharField(max_length=20, blank=True, null=True)
+    email = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False

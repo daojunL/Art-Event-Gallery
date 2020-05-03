@@ -37,8 +37,9 @@
       </a>
       <nav>
         <ul>
-          <li><a href="#hero">HOME</a></li>
-          <li> <a href="#contact">CONTACT</a></li>
+            <li><a href="#hero">HOME</a></li>
+            <li> <a href="#contact">CONTACT</a></li>
+            <li><a href="/cancel/">CANCEL</a></li>
         </ul>
       </nav>
     </header>
@@ -70,31 +71,31 @@
       <div class="container_card">
         <div class="card-deck">
           <div class="card">
-            <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+            <img class="card-img-top" src="{{ content.e_image.0 }}"  alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-              <p class="card-text">2020/02/03,Boston</p>
+                <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.0 }}">{{ content.title.0 }}</a></h5>
+              <p class="card-text">{{ content.date.0 }}, {{ content.address.0 }}</p>
             </div>
           </div>
           <div class="card">
-            <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+            <img class="card-img-top" src="{{ content.e_image.3 }}" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-              <p class="card-text">2020/02/03,Boston</p>
+                <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.3 }}">{{ content.title.3 }}</a></h5>
+              <p class="card-text">{{ content.date.3 }}, {{ content.address.3 }}</p>
             </div>
           </div>
           <div class="card">
-            <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+            <img class="card-img-top" src="{{ content.e_image.6 }}" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-              <p class="card-text">2020/02/03,Boston</p>
+                <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.6 }}">{{ content.title.6 }}</a></h5>
+              <p class="card-text">{{ content.date.6 }}, {{ content.address.6 }}</p>
             </div>
           </div>
           <div class="card">
-            <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+            <img class="card-img-top" src="{{ content.e_image.9 }}" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-              <p class="card-text">2020/02/03,Boston</p>
+                <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.9 }}">{{ content.title.9 }}</a></h5>
+              <p class="card-text">{{ content.date.9 }}, {{ content.address.9 }}</p>
             </div>
           </div>
         </div>
@@ -115,37 +116,37 @@
     <div class="container_card">
       <div class="card-deck">
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.1 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.1 }}">{{ content.title.1 }}</a></h5>
+            <p class="card-text">{{ content.date.1 }}, {{ content.address.1 }}</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.4 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.4 }}">{{ content.title.4 }}</a></h5>
+            <p class="card-text">{{ content.date.4 }}, {{ content.address.4 }}</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.7 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.7 }}">{{ content.title.7 }}</a></h5>
+            <p class="card-text">{{ content.date.7 }}, {{ content.address.7 }}</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.10 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.10 }}">{{ content.title.10 }}</a></h5>
+            <p class="card-text">{{ content.date.10 }}, {{ content.address.10 }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="container_h4_text">
-      <h4>Search More Concerts</h4>
+      <h4><a href = "/theater/">Search More Theater Plays</a></h4>
     </div>
 
   </section>
@@ -160,37 +161,37 @@
     <div class="container_card">
       <div class="card-deck">
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.2 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.2 }}">{{ content.title.2 }}</a></h5>
+            <p class="card-text">{{ content.date.2 }}, {{ content.address.2 }}</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.5 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.5 }}">{{ content.title.5 }}</a></h5>
+            <p class="card-text">{{ content.date.5 }}, {{ content.address.5 }}</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.8 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.8 }}">{{ content.title.8 }}</a></h5>
+            <p class="card-text">{{ content.date.8 }}, {{ content.address.8 }}</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'images/pic.png' %}" alt="Card image cap">
+          <img class="card-img-top" src="{{ content.e_image.11 }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">React Summit 2020 New Year Conference</h5>
-            <p class="card-text">2020/02/03,Boston</p>
+              <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.11 }}">{{ content.title.11 }}</a></h5>
+            <p class="card-text">{{ content.date.11 }}, {{ content.address.11 }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="container_h4_text">
-      <h4>Search More Concerts</h4>
+        <h4><a href = "/exhibition/">Search More Exhibitions</a></h4>
     </div>
 
   </section>

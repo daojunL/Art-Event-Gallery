@@ -7,7 +7,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static 'css/eventPageTemplate.css'  %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/eventPageTemplate2.css'  %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -59,15 +59,11 @@
             <div class="row">
                 <div class="col-8">
                     <div class = "left_content">
-                        <h2> Seat Map </h2>
-                        <img src = {{ content.seatmap }} width="500" height="500"></img>
+                        <h2> background </h2>
+                        <P>{{content.background}}</P>
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class = "right_content">
-                        <h2> Performers </h2>
-                        <h4 class = "p"> {{ content.name }}</h4>
-                    </div>
                     <div class = "right_content">
                         <h2> Time </h2>
                         <h4 class = "p"> {{ content.date }}</h4>

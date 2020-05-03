@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Access-Control-Allow-Origin" content="IE=edge">
     <meta charset="utf-8">
-    <title>Subscribe Page</title>
+    <title>Cancel Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,7 +33,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="span12">
-					<h1>Wanna know more?</h1>
+					<h1>Wanna cancel order?</h1>
 				</div>
 			</div>
 		</div>
@@ -43,16 +43,13 @@
 	<hr>
 	<div class="row-fluid">
 
-			<h3>SUBSCRIBE TO GET THE LATEST NEWS!</h3>
+			<h3>ENTER PAYMENT ID TO CANCEL YOUR ORDER!</h3>
 			<!-- CONTACT FORM -->
 			<div class="row-fluid">
-				<label>Name</label><input  id = "name" class="span12" type="text" name="name" value=""><br>
-
-				<label>E-Mail</label><input  id = "email" class="span12" type="text" name="email" value=""><br>
-
-        <label>&nbsp;</label>
-
-      </div>
+				<label>Payment Id
+                    </label><input  id = "Pid" class="span12" type="text" name="Pid" value=""><br><label>&nbsp;
+                </label>
+             </div>
         <button class="btn btn-large btn-info" id = "submit" type="button">submit</button>
 			<!-- END CONTACT FORM -->
 		</div>
@@ -68,23 +65,24 @@
 
 <script>
   $("#submit").click(function () {
+    var arr = {
+      pid: $("#Pid").val(),
+      {#email: $("#email").val(),#}
+    };
 
-      var arr = {
-          name: $("#name").val(),
-          email: $("#email").val(),
-      };
-      $.ajax({
-          url: 'http://127.0.0.1:8000/contact/subscribe/',
-          type: 'POST',
-          data: JSON.stringify(arr),
-          contentType: 'application/json; charset=utf-8',
-          dataType: 'json',
-          async: true,
-          success: function (msg) {
-              alert(msg);
-          }
-      });
-      confirm("Confirm your order");
+    console.log("arr:" + JSON.stringify(arr));
+    $.ajax({
+      url: 'http://127.0.0.1:8000/cancel/refund/',
+      type: 'POST',
+      data: JSON.stringify(arr),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      async: true,
+      success: function (msg) {
+        alert(msg);
+      }
+    });
+     confirm("Cancel your order?");
   })
 </script>
 <!-- CONTACT FORM SCRIPT -->

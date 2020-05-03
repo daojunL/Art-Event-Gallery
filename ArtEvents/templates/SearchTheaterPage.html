@@ -37,7 +37,7 @@
     <div class="container">
         <header>
             <a href="">
-                <h4 class="logo">Music</h4>
+                <h4 class="logo">Theater</h4>
             </a>
             <nav>
                 <ul>
@@ -46,7 +46,7 @@
             </nav>
         </header>
 
-        <img src="{% static 'images/rock.jpg' %}" class="img-fluid" alt="Responsive image">
+        <img src="{% static 'images/exhibition.png' %}" class="img-fluid" alt="Responsive image">
         <!-- select button section -->
         <div class="button_container_container">
             <div class="btn-group">
@@ -82,16 +82,16 @@
                     </div>
                 </div>
                 <div class="text-button-container">
-                    Choose A Type
+                    Choose A Genre
                     <button type="button" id="btnType" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         default
                     </button>
                     <div>
                         <ul class="dropdown-menu" id="ddmType">
-                            <li><a class="dropdown-item" href="#" data-value="Rock">Rock</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="R&B">R&B</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Country">Country</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Theatre">Theatre</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Comedy">Comedy</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Miscellaneous">Miscellaneous</a></li>
                         </ul>
                     </div>
                 </div>
@@ -126,28 +126,28 @@
                     <img class="card-img-top" src="{{ content.e_image.0 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.0 }}" class = "href-style"> {{ content.title.0 }} </a></h5>
-                        <p class="card-text">{{ content.date.0 }}, {{ content.address.0 }}</p>
+                        <p class="card-text">{{ content.date.0 }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card-img-top" src="{{ content.e_image.1 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.1 }}" class = "href-style">{{ content.title.1 }}</a></h5>
-                        <p class="card-text">{{ content.date.1 }}, {{ content.address.1 }}</p>
+                        <p class="card-text">{{ content.date.1 }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card-img-top" src="{{ content.e_image.2 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.2 }}" class = "href-style">{{ content.title.2 }}</a></h5>
-                        <p class="card-text">{{ content.date.2 }}, {{ content.address.2 }}</p>
+                        <p class="card-text">{{ content.date.2 }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card-img-top" src="{{ content.e_image.3 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.3 }}" class = "href-style">{{ content.title.3 }}</a></h5>
-                        <p class="card-text">{{ content.date.3 }}, {{ content.address.3 }}</p>
+                        <p class="card-text">{{ content.date.3 }}</p>
                     </div>
                 </div>
             </div>
@@ -159,28 +159,28 @@
                     <img class="card-img-top" src="{{ content.e_image.4 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.4 }}" class = "href-style">{{ content.title.4 }}</a></h5>
-                        <p class="card-text">{{ content.date.4 }}, {{ content.address.4 }}</p>
+                        <p class="card-text">{{ content.date.4 }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card-img-top" src="{{ content.e_image.5 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.5 }}" class = "href-style">{{ content.title.5 }}</a></h5>
-                        <p class="card-text">{{ content.date.5 }}, {{ content.address.5 }}</p>
+                        <p class="card-text">{{ content.date.5 }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card-img-top" src="{{ content.e_image.6 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.6 }}" class = "href-style">{{ content.title.6 }}</a></h5>
-                        <p class="card-text">{{ content.date.6 }}, {{ content.address.6 }}</p>
+                        <p class="card-text">{{ content.date.6 }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card-img-top" src="{{ content.e_image.7 }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><a href = "../detail?eid={{ content.Eid.7 }}" class = "href-style">{{ content.title.7 }}</a></h5>
-                        <p class="card-text">{{ content.date.7 }}, {{ content.address.7 }}</p>
+                        <p class="card-text">{{ content.date.7 }}</p>
                     </div>
                 </div>
             </div>
@@ -213,11 +213,11 @@
                         Time: $("#btnTime").val(),
                         Type: $("#btnType").val(),
                         Sort: $("#btnSort").val(),
-                        Tag: "Concert"};
+                        Tag: "Theater"};
 
             console.log("arr:" + JSON.stringify(arr));
             $.ajax({
-                url: "http://127.0.0.1:8000/music/search/",
+                url: "http://127.0.0.1:8000/theater/search/",
                 type: 'POST',
                 data: JSON.stringify(arr),
                 contentType: 'application/json; charset=utf-8',

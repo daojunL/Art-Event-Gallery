@@ -12,7 +12,7 @@ body {
 /* Navigation */
 header {
 	width: 100%;
-	height: 6%;
+	height: 10%;
 	background-color: #c5cbcb;
 	border-bottom: 1px solid rgb(166, 170, 179);
 }
@@ -79,7 +79,7 @@ ul li:hover a {
     margin-top: 0px;
 	margin-left: auto;
 	margin-right: auto;
-	height: 900px;
+	height: 500px;
 	background-color: white;
 }
 
@@ -203,7 +203,6 @@ footer .footer_column p {
 	padding-top: 30px;
 	padding-bottom: 30PX;
 	margin-bottom: 0px;
-	background-image: url(../images/pattern.png);
 	background-repeat: repeat;
 }
 footer {

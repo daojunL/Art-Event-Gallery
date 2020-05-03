@@ -34,8 +34,8 @@ def ShowEvents(request):
     date_YMD = []
     for item in eid:
         lid = Held.objects.filter(eid=item).values('lid')
-        addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')
-        address.append(addr[0].get('address'))
+        addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')[0].get("address")
+        address.append(addr.split("/")[1])
         timeSerial = TOn.objects.filter(eid=item).values('time_serial')
         date = Time.objects.filter(time_serial=timeSerial[0].get('time_serial')).values('date_ymd')
         date_YMD.append(date[0].get('date_ymd'))
@@ -113,7 +113,6 @@ def QueryEvents(request):
         for i in range(len(tmpEvents)):
             Eid3.add(tmpEvents[i].get('eid'))
 
-
     # get the intersection of Eid1 / Eid2 / Eid3
     finalEid = Eid1 & Eid2 & Eid3
     eid = list(finalEid)
@@ -156,7 +155,7 @@ def QueryEvents(request):
             date_YMD.append(date[0].get('date_ymd'))
 
     content = {
-        'Eid': eid,
+        'eid': eid,
         'title': title,
         'e_image': e_image,
         'address': address,
@@ -176,7 +175,9 @@ def detail(request):
     name = Artist.objects.filter(aid = aid).values('artist_name')[0].get('artist_name')
     seatmap = ArtEvents.objects.filter(eid=eid).values('seatmap')[0].get('seatmap')
     lid = Held.objects.filter(eid=eid).values('lid')[0].get('lid')
-    address = Location.objects.filter(lid=lid).values('address')[0].get('address') # address这里还要对数据进行进一步的处理
+    addr = Location.objects.filter(lid=lid).values('address')[0].get('address') # address这里还要对数据进行进一步的处理
+    addr_arr = addr.split("/")
+    address = addr_arr[0] + ", " + addr_arr[1] + ", " + addr_arr[2]
     timeSerial = TOn.objects.filter(eid=eid).values('time_serial')[0].get('time_serial')
     date = Time.objects.filter(time_serial=timeSerial).values('date_ymd')[0].get('date_ymd')
     content = {
@@ -192,9 +193,15 @@ def detail(request):
 def payment(request):
     eid = request.GET.get('eid')
     price = TicketHas.objects.filter(eid = eid).values('price')[0].get('price')
+    refund = TicketHas.objects.filter(eid=eid).values('refund_policy')[0].get('refund_policy')
+    if refund == "yes":
+        refund = "As you wish"
+    elif refund == "no":
+        refund = "No Refund"
     content = {
         'eid' : eid,
-        'price' : price
+        'price' : price,
+        'refund': refund
     }
     return render(request, 'Payment.html', context = {'content' : content})
 
