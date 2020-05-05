@@ -64,7 +64,7 @@ def TheaterQuery(request):
     city = data.get('City')
     time = data.get('Time')
     type = data.get('Type')
-    sort = data.get('Sort')
+    # sort = data.get('Sort')
     # city = 'Boston'
     # time = '5'
     # type = 'Rock'
@@ -72,7 +72,7 @@ def TheaterQuery(request):
     # find the search eventid
     Eid1, Eid2, Eid3 = set(), set(), set()
     tmpEid = set()
-    tmpEvents = ArtEvents.objects.all().values('eid')
+    tmpEvents = Theater.objects.all().values('eid')
     for i in range(len(tmpEvents)):
         tmpEid.add(tmpEvents[i].get('eid'))
     if city != '':
@@ -116,8 +116,13 @@ def TheaterQuery(request):
         Eid3 = tmpEid
 
     # get the intersection of Eid1 / Eid2 / Eid3
-    finalEid = Eid1 & Eid2 & Eid3
-    eid = list(finalEid)
+    inEid = Eid1 & Eid2 & Eid3 & tmpEid
+    # eid = list(finalEid)
+    # only select top 8
+    if len(inEid) >= 8:
+        finalEid = list(inEid)[0:8]
+    else:
+        finalEid = list(inEid)
     ## query: Eid, title, e_image，address, date_YMD
     title, e_image, address, date_YMD = [], [], [], []
     print("finalEid")
@@ -158,7 +163,7 @@ def TheaterQuery(request):
             date_YMD.append(date[0].get('date_ymd'))
 
     content = {
-        'Eid': eid,
+        'Eid': finalEid,
         'title': title,
         'e_image': e_image,
         'address': address,

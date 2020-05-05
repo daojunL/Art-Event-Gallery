@@ -68,21 +68,22 @@ def MusicQuery(request):
     city = data.get('City')
     time = data.get('Time')
     type = data.get('Type')
-    sort = data.get('Sort')
+    # sort = data.get('Sort')
     # city = 'Boston'
-    # time = '5'
-    # type = 'Rock'
+    # time = ''
+    # type = ''
     # start = datetime.datetime.now()
     # find the search eventid
     Eid1, Eid2, Eid3 = set(), set(), set()
     tmpEid = set()
-    tmpEvents = ArtEvents.objects.all().values('eid')
+    tmpEvents = Concert.objects.all().values('eid')
     for i in range(len(tmpEvents)):
         tmpEid.add(tmpEvents[i].get('eid'))
+
     if city != '':
         lid = Location.objects.filter(address__contains=city).values('lid')
         if len(lid) == 0:
-        #     pass
+             #pass
             return render(request, 'SearchConcertPage.html', {'error_message':'Events not found'})
         if len(lid) == 1:
             curlid = lid[0].get('lid')
@@ -121,8 +122,13 @@ def MusicQuery(request):
         Eid3 = tmpEid
 
     # get the intersection of Eid1 / Eid2 / Eid3
-    finalEid = Eid1 & Eid2 & Eid3
-    eid = list(finalEid)
+    inEid = Eid1 & Eid2 & Eid3 & tmpEid
+    # eid = list(finalEid)
+    # only select top 8
+    if len(inEid) >= 8:
+        finalEid = list(inEid)[0:8]
+    else:
+        finalEid = list(inEid)
     ## query: Eid, title, e_image，address, date_YMD
     title, e_image, address, date_YMD = [], [], [], []
     print("finalEid")
@@ -133,7 +139,7 @@ def MusicQuery(request):
         }
         # return render(request, 'SearchConcertPage.html', context=content)
         return JsonResponse(content)
-        # pass
+        #pass
     elif len(finalEid) == 1:
         feid = finalEid[0]
         t = ArtEvents.objects.filter(eid=feid).values('title', 'e_image')  # title, e_image
@@ -163,7 +169,7 @@ def MusicQuery(request):
             date_YMD.append(date[0].get('date_ymd'))
 
     content = {
-        'Eid': eid,
+        'Eid': finalEid,
         'title': title,
         'e_image': e_image,
         'address': address,
