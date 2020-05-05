@@ -67,14 +67,14 @@ def ExhibtionQuery(request):
     city = data.get('City')
     time = data.get('Time')
 
-    city = 'Boston'
-    time = '5'
+    # city = 'Boston'
+    # time = '5'
     # type = 'Rock'
     # start = datetime.datetime.now()
     # find the search eventid
     Eid1, Eid2 = set(), set()
     tmpEid = set()
-    tmpEvents = ArtEvents.objects.all().values('eid')
+    tmpEvents = Exhibition.objects.all().values('eid')
     for i in range(len(tmpEvents)):
         tmpEid.add(tmpEvents[i].get('eid'))
     if city != '':
@@ -109,8 +109,11 @@ def ExhibtionQuery(request):
         Eid2 = tmpEid
 
     # get the intersection of Eid1 / Eid2
-    finalEid = Eid1 & Eid2
-    eid = list(finalEid)
+    inEid = Eid1 & Eid2 & tmpEid
+    if len(inEid) >= 8:
+        finalEid = list(inEid)[0:8]
+    else:
+        finalEid = list(inEid)
     ## query: Eid, title, e_image，address, date_YMD
     title, e_image, address, date_YMD = [], [], [], []
     print("finalEid")
@@ -151,7 +154,7 @@ def ExhibtionQuery(request):
             date_YMD.append(date[0].get('date_ymd'))
 
     content = {
-        'Eid': eid,
+        'Eid': finalEid,
         'title': title,
         'e_image': e_image,
         'address': address,
