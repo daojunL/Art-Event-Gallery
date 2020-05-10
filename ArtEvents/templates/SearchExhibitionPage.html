@@ -48,43 +48,41 @@
 
         <img src="{% static 'images/exhibition.png' %}" class="img-fluid" alt="Responsive image">
         <!-- select button section -->
-        <div class="button_container_container">
-            <div class="btn-group">
-                <div class="text-button-container">
-                    Choose A City
-                    <button type="button" id="btnCity" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        default
-                    </button>
-                    <div>
-                        <ul class="dropdown-menu" id="ddmCity">
-                            <li><a class="dropdown-item" href="#" data-value="New York">New York</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Boston">Boston</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Los Angeles">Los Angeles</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="text-button-container">
-                    Choose A Time
-                    <button type="button" id="btnTime" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        default
-                    </button>
-                    <div>
-                        <ul class="dropdown-menu" id="ddmTime">
-                            <li><a class="dropdown-item" href="#" data-value="1">In a week</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="2">In a month</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="3">In three months</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="4">In half a year</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="5">In a year</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <button type="button" id="btnSubmit" class="btn btn-danger btn-lg">Confirm</button>
+<div class="button_container_container">
+    <form action="http://127.0.0.1:8000/exhibition/search/" , method="post">
+        <div class="btn-group">
+        {% csrf_token %}
+            <div class = "text-button-container">
+            <div class="form-group" style = "width: 110px;">
+                Choose A City
+                <select class="form-control" name = "city">
+                    <option>default</option>
+                    <option>New York</option>
+                    <option>Boston</option>
+                    <option>Los Angeles</option>
+                </select>
+            </div>
             </div>
 
+            <div class = "text-button-container">
+            <div class="form-group" style = "width: 120px;">
+                Choose A Time
+                <select class="form-control" name = "time">
+                    <option>default</option>
+                    <option>In a week</option>
+                    <option>In a month</option>
+                    <option>In three months</option>
+                    <option>In half a year</option>
+                    <option>In a year</option>
+                </select>
+            </div>
+            </div>
+            <button type="submit" id="btnSubmit" class="btn btn-danger btn-lg">Confirm</button>
         </div>
+    </form>
+</div>
+
+
 
         <!--sort by distance sort by date-->
 
@@ -106,119 +104,27 @@
         </div>
 
         <!--Search Result List-->
-        <div class="container_card">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.0 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.0 }}" class = "href-style"> {{ content.title.0 }} </a></h5>
-                        <p class="card-text">{{ content.date.0 }}</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.1 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.1 }}" class = "href-style">{{ content.title.1 }}</a></h5>
-                        <p class="card-text">{{ content.date.1 }}</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.2 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.2 }}" class = "href-style">{{ content.title.2 }}</a></h5>
-                        <p class="card-text">{{ content.date.2 }}</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.3 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.3 }}" class = "href-style">{{ content.title.3 }}</a></h5>
-                        <p class="card-text">{{ content.date.3 }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="container_card">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.4 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.4 }}" class = "href-style">{{ content.title.4 }}</a></h5>
-                        <p class="card-text">{{ content.date.4 }}</p>
+        <div class="card-deck parent">
+            {% if events %}
+                {% for event in events %}
+                    <div class="child">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ event.e_image }}" alt="Card image cap">
+                            <div class="card-body" >
+                                <h5 class="card-title" style = "height: 50px;"><a href="http://127.0.0.1:8000/detailExp?eid={{ event.eid }}" class="href-style">{{ event.title }}</a>
+                                </h5>
+                                <p class="card-text">{{ event.date }}, {{ event.address }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.5 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.5 }}" class = "href-style">{{ content.title.5 }}</a></h5>
-                        <p class="card-text">{{ content.date.5 }}</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.6 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.6 }}" class = "href-style">{{ content.title.6 }}</a></h5>
-                        <p class="card-text">{{ content.date.6 }}</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="{{ content.e_image.7 }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href = "../detailExp?eid={{ content.Eid.7 }}" class = "href-style">{{ content.title.7 }}</a></h5>
-                        <p class="card-text">{{ content.date.7 }}</p>
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
+            {% endif %}
         </div>
 
         <div class="copyright">&copy;2020- <strong>Art Theme</strong></div>
+
     </div>
-
-
-    <script src="" async defer></script>
-    <script>
-        $("#ddmCity li a").click(function () {
-            $(this).parents(".text-button-container").find('.btn').html($(this).text());
-            $(this).parents(".text-button-container").find('.btn').val($(this).data('value'));
-        });
-        $("#ddmTime li a").click(function () {
-            $(this).parents(".text-button-container").find('.btn').html($(this).text());
-            $(this).parents(".text-button-container").find('.btn').val($(this).data('value'));
-        });
-        $("#ddmType li a").click(function () {
-            $(this).parents(".text-button-container").find('.btn').html($(this).text());
-            $(this).parents(".text-button-container").find('.btn').val($(this).data('value'));
-        });
-        $("#sortType li a").click(function () {
-            $(this).parents(".sort_container").find('.btn').html($(this).text());
-            $(this).parents(".sort_container").find('.btn').val($(this).data('value'));
-        });
-        $("#btnSubmit").click(function () {
-            var arr = { City: $("#btnCity").val(),
-                        Time: $("#btnTime").val(),
-                        Sort: $("#btnSort").val(),
-                        Tag: "Exhibition"};
-
-            console.log("arr:" + JSON.stringify(arr));
-            $.ajax({
-                url: "http://127.0.0.1:8000/exhibition/search/",
-                type: 'POST',
-                data: JSON.stringify(arr),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                async: true,
-                success: function (content) {
-                    for (let i = 0; i < $(".card-title").length; i++){
-                        $(".href-style")[i].innerHTML = content.title[i];
-                        $(".href-style")[i].href = "../detail?eid=" + content.eid[i];
-                        $(".card-text")[i].innerHTML = content.date[i];
-                        $(".card-img-top")[i].src=content.e_image[i];
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

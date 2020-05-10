@@ -27,10 +27,8 @@ def write_pay_info(request):
     thisId = request.POST.get('eid', None) ## 获取EID
     t_num = request.POST.get('ticketnum', None) ## 获取票的张数
     ticket = TicketHas.objects.get(eid=thisId)
-    print(ticket)
     all_num = ticket.amount
     new_num = int(all_num) - int(t_num)
-    print('n', new_num)
     TicketHas.objects.filter(eid=thisId).update(amount=str(new_num))
     cname = request.POST.get('credit-number', None) # credit card number
     address = request.POST.get('address', None) # address
@@ -48,7 +46,6 @@ def write_pay_info(request):
         'address': address,
         'total_price': total_price
     }
-    print(content)
     emailTo = email
     payId = str(cname)
     payreply(emailTo, payId)

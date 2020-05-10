@@ -11,6 +11,16 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 # Create your views here.
 
+class Event:
+
+    def __init__(self, eid, title, e_image, date, address):
+        self.eid = eid
+        self.title = title
+        self.e_image = e_image
+        self.date = date
+        self.address = address
+
+
 @require_GET
 # Create your views here.
 def ShowEvents(request):
@@ -34,8 +44,8 @@ def ShowEvents(request):
     date_YMD = []
     for item in eid:
         lid = Held.objects.filter(eid=item).values('lid')
-        addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')
-        address.append(addr[0].get('address'))
+        addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')[0].get("address")
+        address.append(addr.split("/")[1])
         timeSerial = TOn.objects.filter(eid=item).values('time_serial')
         date = Time.objects.filter(time_serial=timeSerial[0].get('time_serial')).values('date_ymd')
         date_YMD.append(date[0].get('date_ymd'))
@@ -48,8 +58,12 @@ def ShowEvents(request):
         'date': date_YMD,
         'status': 'SUCCESS'
     }
-    content['date'].sort()
-    return render(request, 'SearchTheaterPage.html', context={'content': content})
+    events = []
+
+    for i in range(len(content['Eid'])):
+        events.append(Event(content['Eid'][i], content['title'][i], content['e_image'][i], content['date'][i], content['address'][i]))
+
+    return render(request, 'SearchTheaterPage.html', context={'events': events})
 
 @csrf_exempt
 @require_POST
@@ -60,16 +74,31 @@ def QueryEvents(request):
                 '3': 90,
                 '4': 180,
                 '5': 365}
-    data = json.loads(request.body)
-    city = data.get('City')
-    time = data.get('Time')
-    type = data.get('Type')
-    sort = data.get('Sort')
-    print("city")
+    city = request.POST.get('city', None)
+    time = request.POST.get('time', None)
+    type = request.POST.get('type', None)
+
+    if time == "In a week":
+        time = "1"
+    elif time == "In a month":
+        time = "2"
+    elif time == "In three months":
+        time = "3"
+    elif time == "In half a year":
+        time = "4"
+    elif time == "In a year":
+        time = "5"
+    else:
+        time = ''
+
+    if city == "default":
+        city = ""
+
+    if type == "default":
+        type = ""
+
     print(city)
-    print("time")
     print(time)
-    print("type")
     print(type)
     # find the search eventid
     Eid1, Eid2, Eid3 = set(), set(), set()
@@ -121,13 +150,6 @@ def QueryEvents(request):
         for i in range(len(tmpEvents)):
             Eid3.add(tmpEvents[i].get('eid'))
 
-
-    print("eid1")
-    print(Eid1)
-    print("eid2")
-    print(Eid2)
-    print("eid3")
-    print(Eid3)
     # get the intersection of Eid1 / Eid2 / Eid3
     finalEid = Eid1 & Eid2 & Eid3
     eid = list(finalEid)
@@ -141,19 +163,6 @@ def QueryEvents(request):
         }
         # return render(request, 'SearchConcertPage.html', context=content)
         return JsonResponse(content)
-    elif len(finalEid) == 1:
-        feid = finalEid[0]
-        t = ArtEvents.objects.filter(eid=feid).values('title', 'e_image')  # title, e_image
-        title.append(t[0].get('title'))
-        e_image.append(t[0].get('e_image'))
-
-        lid = Held.objects.filter(eid=feid).values('lid')
-        addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')
-        address.append(addr[0].get('address'))  # address
-
-        timeSerial = TOn.objects.filter(eid=feid).values('time_serial')
-        date = Time.objects.filter(time_serial=timeSerial[0].get('time_serial')).values('date_ymd')
-        date_YMD.append(date[0].get('date_ymd'))
     else:
         for item in finalEid:
             t = ArtEvents.objects.filter(eid=item).values('title', 'e_image')  # title, e_image
@@ -162,8 +171,8 @@ def QueryEvents(request):
             e_image.append(t[0].get('e_image'))
 
             lid = Held.objects.filter(eid=item).values('lid')
-            addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')
-            address.append(addr[0].get('address'))
+            addr = Location.objects.filter(lid=lid[0].get('lid')).values('address')[0].get("address")
+            address.append(addr.split("/")[1])
 
             timeSerial = TOn.objects.filter(eid=item).values('time_serial')
             date = Time.objects.filter(time_serial=timeSerial[0].get('time_serial')).values('date_ymd')
@@ -181,7 +190,14 @@ def QueryEvents(request):
     content['date'].sort()
     # sort by distance
     # if sort == "2":
-    return JsonResponse(content)
+
+    events = []
+
+    for i in range(len(content['eid'])):
+        events.append(Event(content['eid'][i], content['title'][i], content['e_image'][i], content['date'][i],
+                            content['address'][i]))
+
+    return render(request, 'SearchTheaterPage.html', context={'events': events})
 
 
 

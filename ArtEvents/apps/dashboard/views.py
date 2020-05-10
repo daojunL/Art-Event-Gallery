@@ -42,6 +42,7 @@ def home(request):
         'date': date_YMD,
         'status': 'SUCCESS'
     }
+
     return render(request, 'HomePage.html', context={'content': content})
 
 @require_GET
